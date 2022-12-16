@@ -9,6 +9,15 @@
 // });
 
 
+// const url = "mongodb://localhost:27017/myDatabase";
+
+// MongoClient.connect(url, (err,res)=>{
+//     if (err) throw err;
+//     console.log('database created!');
+//     res.close();
+// })
+
+
 // Create Collection (Table)
 // const url = "mongodb://localhost:27017/";
 // const config = {
@@ -37,7 +46,7 @@
 
 
 
-// Insert Data 
+// Insert Only One Data 
 
 // const url = "mongodb://localhost:27017/";
 // const config = {
@@ -62,7 +71,7 @@
 // abc();  
 
 
-
+// Insert many Data
 // const MongoClient = require("mongodb").MongoClient;
 
 // const url = "mongodb://localhost:27017/";
@@ -70,10 +79,25 @@
 //     try {
 //         const clinet = await MongoClient.connect(url);
 //         const dbName = clinet.db("mydb");
-//         const response = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
-//         await dbName.collection("customer").insertMany(response)
+//         const response = await fetch('https://jsonplaceholder.typicode.com/photos').then((res) => res.json())
+//         await dbName.collection("album").insertMany(response)
 //         clinet.close();
 
 //     } catch (err) { console.log(err) }
 // })
 //     ()
+
+
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017/';
+
+(async function () {
+    try {
+        const client = await MongoClient.connect(url);
+        const dbName = client.db("myDatabase");
+        const response = await fetch('https://jsonplaceholder.typicode.com/users').then((res) => res.json())
+        await dbName.collection('userNew').insertMany(response)
+        client.close();
+    } catch (err) { console.log(err) }
+})
+    ()
