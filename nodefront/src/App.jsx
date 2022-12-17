@@ -23,11 +23,6 @@ function App() {
     fetchData()
   }, [a])
 
-
-  console.log(isUserData)
-
-
-
   return (
     <div className="App">
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
@@ -38,7 +33,7 @@ function App() {
               <p>{val.name}</p>
             </div>
           );
-        })}
+        })};
       </div>
     </div>
   )
