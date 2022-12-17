@@ -70,74 +70,11 @@ const EventEmiter = require('events')
 
 // Get Data In MongoDb
 
-// const MongoClient = require("mongodb").MongoClient;
-// const url = "mongodb://localhost:27017/";
-// const express = require('express')
-// const app = express()
-// const port = 8080
-
-
-// MongoClient.connect(url, (err, res) => {
-//     if (err) throw err;
-//     const myDatabase = res.db('myDatabase');
-//     myDatabase.collection('userNew').find({}).toArray((err, result) => {
-//         if (err) throw err;
-//         app.get('/post', (req, res) => {
-//             res.send(result)
-//         })
-//         res.close();
-//     })
-// })
-// app.get('/', (req, res) => {
-//     res.send("Home Page")
-// })
-
-// app.listen(port, () => {
-//     console.log(`Example app listening on port ${port}`)
-// })
-
-
-// Search Query Results
-
-// const MongoClient = require("mongodb").MongoClient;
-// const url = "mongodb://localhost:27017/";
-// const express = require('express')
-// const app = express()
-// const port = 8080
-
-
-// MongoClient.connect(url, (err, res) => {
-//     if (err) throw err;
-//     const myDatabase = res.db('myDatabase');
-
-
-//     const query = {username: "Samantha"}
-//     // const query = { name: /^C/ };
-//     myDatabase.collection('userNew').find(query).toArray((err, result) => {
-//         if (err) throw err;
-//         app.get('/post', (req, res) => {
-//             res.send(result)
-//         })
-//         res.close();
-//     })
-// })
-// app.get('/', (req, res) => {
-//     res.send("Home Page")
-// })
-
-// app.listen(port, () => {
-//     console.log(`Example app listening on port ${port}`)
-// })
-
-
-
-
 const MongoClient = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/";
 const express = require('express')
 const app = express()
 const port = 8080
-
 
 MongoClient.connect(url, (err, res) => {
     if (err) throw err;
@@ -150,6 +87,41 @@ MongoClient.connect(url, (err, res) => {
         res.close();
     })
 })
+// app.get('/', (req, res) => {
+//     res.send("Home Page")
+// })
+
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`)
+// })
+
+
+
+// Delete Only One Data Query
+
+// const MongoClient = require("mongodb").MongoClient;
+const urlDelete = "mongodb://localhost:27017/";
+// const express = require('express')
+// const appDelete = express()
+// const portDelete = 8080
+
+
+MongoClient.connect(urlDelete, (err, res) => {
+    if (err) throw err;
+    const myDatabaseDelete = res.db('myDatabase');
+    function deleteP(req) {
+        console.log("REQ", req)
+        const query = {id: parseInt(req)}
+        myDatabaseDelete.collection('userNew').deleteOne(query, (err, result) => {
+            if (err) throw err;
+            console.log(result)
+        })
+    }
+    app.get('/delete', (req, response) => {
+        deleteP(req?.query?.id)
+        response.send('success')
+    })
+})
 app.get('/', (req, res) => {
     res.send("Home Page")
 })
@@ -157,3 +129,32 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
+// Delete Multiple Data From Table  Query
+// const MongoClient = require("mongodb").MongoClient;
+// const url = "mongodb://localhost:27017/";
+// const express = require('express')
+// const app = express()
+// const port = 8080
+
+
+// MongoClient.connect(url, (err, res) => {
+//     if (err) throw err;
+//     const myDatabase = res.db('myDatabase');
+//     const query = { username: "Samantha" }
+//     myDatabase.collection('userNew').deleteMany((err, result) => {
+//         if (err) throw err;
+//         app.get('/post', (req, res) => {
+//             res.send(result)
+//         })
+//         res.close();
+//     })
+// })
+// app.get('/', (req, res) => {
+//     res.send("Home Page")
+// })
+
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`)
+// })
