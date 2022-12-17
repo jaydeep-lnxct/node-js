@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userAction } from './redux/reducer';
+
 function App() {
   const [isUserData, setUserData] = useState([]);
   const [a] = useState();
 
+  const dispatch = useDispatch()
+  const userSelector = useSelector((state) => state?.value)
   const deletePost = useCallback(async (id) => {
     await axios.get(`http://localhost:8080/delete`, { params: { id: id } });
   }, [])
@@ -14,7 +19,7 @@ function App() {
     const fetchData = async () => {
       try {
         const UserData = await axios.get(`http://localhost:8080/post`);
-        setUserData(UserData?.data)
+        dispatch(userAction(UserData?.data))
       }
       catch (err) {
         console.log(err);
@@ -23,17 +28,19 @@ function App() {
     fetchData()
   }, [a])
 
+  console.log(userSelector)
+
   return (
     <div className="App">
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-        {isUserData?.map((val) => {
+        {userSelector?.map((val) => {
           return (
             <div style={{ margin: 10, background: '#f2f2f2' }} onClick={() => deletePost(val.id)}>
               <h1>{val.id}</h1>
               <p>{val.name}</p>
             </div>
           );
-        })};
+        })}
       </div>
     </div>
   )

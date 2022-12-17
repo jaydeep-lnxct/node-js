@@ -1,13 +1,5 @@
 // var MongoClient = require('mongodb').MongoClient;
 //Create a database named "mydb":
-// var url = "mongodb://localhost:27017/mydb";
-
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   console.log("Database created!");
-//   db.close();
-// });
-
 
 // const url = "mongodb://localhost:27017/myDatabase";
 
@@ -19,16 +11,12 @@
 
 
 // Create Collection (Table)
-// const url = "mongodb://localhost:27017/";
-// const config = {
-//     connectTimeoutMS: 5000,
-//     useUnifiedTopology: true
-// }
 
+// const url = "mongodb://localhost:27017/";
 // async function mongodb() {
 
 //     try {
-//         const client = await MongoClient.connect(url, config);
+//         const client = await MongoClient.connect(url);
 //         const dataBaseName = client.db('mydb');
 
 //         dataBaseName.createCollection("userPosr", (err, res) => { 
@@ -46,7 +34,7 @@
 
 
 
-// Insert Data 
+// Insert One Data 
 
 // const url = "mongodb://localhost:27017/";
 // const config = {
@@ -72,8 +60,9 @@
 
 
 
-// const MongoClient = require("mongodb").MongoClient;
+// Insert Many Data 
 
+// const MongoClient = require("mongodb").MongoClient;
 // const url = "mongodb://localhost:27017/";
 // (async function () {
 //     try {
