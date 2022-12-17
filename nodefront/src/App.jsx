@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userAction } from './redux/reducer';
 
 function App() {
-  const [isUserData, setUserData] = useState([]);
   const [a] = useState();
 
   const dispatch = useDispatch()
@@ -27,8 +26,6 @@ function App() {
     }
     fetchData()
   }, [a])
-
-  console.log(userSelector)
 
   return (
     <div className="App">
